@@ -25,7 +25,7 @@ public abstract class CopperBlockerMixin {
 
             String itemName = displayStack.getName().toString();
 
-            if (itemName.contains("copper") && !(itemName.contains("waxed"))) {
+            if ((itemName.contains("copper") || itemName.contains("lightning_rod")) && !(itemName.contains("waxed"))) {
                 this.displayStacks.remove(displayStack);
             }
         }
