@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.jimi64.copperblocker.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "CopperBlockerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

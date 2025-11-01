@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "copperblocker",
+  "version": "${version}",
+  "name": "CopperBlocker",
+  "description": "Small QOL Fabric Mod that removes all unwaxed copper variants from the creative inventory!",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/copperblocker/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.jimi64.copperblocker.client.CopperblockerDataGenerator"
+    ],
+    "client": [
+      "com.jimi64.copperblocker.client.CopperblockerClient"
+    ],
+    "main": [
+      "com.jimi64.copperblocker.Copperblocker"
+    ]
+  },
+  "mixins": [
+    "copperblocker.mixins.json",
+    {
+      "config": "copperblocker.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
