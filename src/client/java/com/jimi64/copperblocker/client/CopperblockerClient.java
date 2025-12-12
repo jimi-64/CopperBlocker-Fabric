@@ -12,7 +12,6 @@ public class CopperblockerClient implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static ArrayList<String> denyList = new ArrayList<String>();
-    public static String blockerMode = "both";
 
 
     @Override
