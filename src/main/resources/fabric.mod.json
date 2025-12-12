@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "copperblocker",
+  "id": "CopperBlocker",
   "version": "${version}",
-  "name": "CopperBlocker",
+  "name": "Copper Blocker",
   "description": "Small QOL Fabric Mod that removes all unwaxed copper variants from the creative inventory!",
   "authors": [],
   "contact": {},
@@ -28,6 +28,6 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${1.21.10}"
   }
 }
