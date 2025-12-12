@@ -1,13 +1,10 @@
 package com.jimi64.copperblocker.client;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemStackSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class CopperblockerClient implements ClientModInitializer {
 
