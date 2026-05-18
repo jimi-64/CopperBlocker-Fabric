@@ -25,7 +25,7 @@ public abstract class CopperBlockerMixin {
 
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    private void CreativeModeTab(CreativeModeTab.Row row, int column, CreativeModeTab.Type type, Component displayName, Supplier iconGenerator, CreativeModeTab.DisplayItemsGenerator displayItemsGenerator, CallbackInfo ci) {
+    private void CreativeModeTab(CreativeModeTab.Row row, int column, CreativeModeTab.Type type, Component displayName, Supplier<ItemStack> iconGenerator, CreativeModeTab.DisplayItemsGenerator displayItemsGenerator, CallbackInfo ci) {
         this.filteredDisplayItems = ItemStackLinkedSet.createTypeAndComponentsSet();
     }
 
