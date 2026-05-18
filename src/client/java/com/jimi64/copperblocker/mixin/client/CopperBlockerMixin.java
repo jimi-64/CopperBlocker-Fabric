@@ -1,9 +1,9 @@
 package com.jimi64.copperblocker.mixin.client;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemStackSet;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackLinkedSet;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,18 +15,18 @@ import java.util.function.Supplier;
 import static com.jimi64.copperblocker.client.CopperblockerClient.denyList;
 import static com.jimi64.copperblocker.client.CopperblockerClient.LOGGER;
 
-@Mixin(value = ItemGroup.class)
+@Mixin(value = CreativeModeTab.class)
 public abstract class CopperBlockerMixin {
 
 
-    @Shadow private Collection<ItemStack> displayStacks;
-    @Shadow @Final private Text displayName;
-    @Unique private Collection<ItemStack> filteredDisplayStacks;
+    @Shadow private Collection<ItemStack> displayItems;
+    @Shadow @Final private Component displayName;
+    @Unique private Collection<ItemStack> filteredDisplayItems;
 
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    private void ItemGroup(ItemGroup.Row row, int column, ItemGroup.Type type, Text displayName, Supplier iconSupplier, ItemGroup.EntryCollector entryCollector, CallbackInfo ci) {
-        this.filteredDisplayStacks = ItemStackSet.create();
+    private void CreativeModeTab(CreativeModeTab.Row row, int column, CreativeModeTab.Type type, Component displayName, Supplier iconGenerator, CreativeModeTab.DisplayItemsGenerator displayItemsGenerator, CallbackInfo ci) {
+        this.filteredDisplayItems = ItemStackLinkedSet.createTypeAndComponentsSet();
     }
 
 
@@ -35,24 +35,24 @@ public abstract class CopperBlockerMixin {
      * @reason prevents all items on the denyList from being shown in the creative menu
      */
     @Overwrite
-    public Collection<ItemStack> getDisplayStacks() {
+    public Collection<ItemStack> getDisplayItems() {
 
-        if (this.filteredDisplayStacks.isEmpty()) {
+        if (this.filteredDisplayItems.isEmpty()) {
 
-            // copies all entries of displayStacks into filteredDisplayStacks
-            this.filteredDisplayStacks.addAll(this.displayStacks);
+            // copies all entries of displayStacks into filteredDisplayItems
+            this.filteredDisplayItems.addAll(this.displayItems);
 
-            for (ItemStack displayStack : this.filteredDisplayStacks) {
+            for (ItemStack displayStack : this.filteredDisplayItems) {
 
                 // gets the item name of the displayStack object
                 String itemName = displayStack.getItem().toString();
 
                 if (denyList.contains(itemName)) {
-                    this.filteredDisplayStacks.remove(displayStack);
+                    this.filteredDisplayItems.remove(displayStack);
                 }
             }
-            LOGGER.info("Filtered ItemGroup '" + this.displayName.getString() + "' successfully!");
+            LOGGER.info("Filtered CreativeModeTab '" + this.displayName.getString() + "' successfully!");
         }
-        return this.filteredDisplayStacks;
+        return this.filteredDisplayItems;
     }
 }
