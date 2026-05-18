@@ -42,13 +42,18 @@ public abstract class CopperBlockerMixin {
             // copies all entries of displayStacks into filteredDisplayItems
             this.filteredDisplayItems.addAll(this.displayItems);
 
-            for (ItemStack displayStack : this.filteredDisplayItems) {
+            for (ItemStack displayItem : this.filteredDisplayItems) {
+
+                // happened once, could not reproduce
+                if (displayItem == null) {
+                    continue;
+                }
 
                 // gets the item name of the displayStack object
-                String itemName = displayStack.getItem().toString();
+                String itemName = displayItem.getItem().toString();
 
                 if (denyList.contains(itemName)) {
-                    this.filteredDisplayItems.remove(displayStack);
+                    this.filteredDisplayItems.remove(displayItem);
                 }
             }
             LOGGER.info("Filtered CreativeModeTab '" + this.displayName.getString() + "' successfully!");
